@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="color-scheme" content="light">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
+    <title>stelsen-monitoring-user</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Force light theme very early to avoid flash of dark theme and prevent later toggles
+      (function(){
+        try{
+          document.documentElement.classList.remove('dark');
+          document.documentElement.style.colorScheme = 'light';
+          document.documentElement.style.backgroundColor = '#ffffff';
+          if(document.body) document.body.style.backgroundColor = '#ffffff';
+          localStorage.setItem('adminDashboardDarkMode', 'false');
+
+          // Observe any later changes to the root class and remove 'dark' if added
+          var obs = new MutationObserver(function(muts){
+            if(document.documentElement.classList.contains('dark')){
+              document.documentElement.classList.remove('dark');
+            }
+          });
+          obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+          // keep reference for debugging
+          window.__forceLightObserver = obs;
+        }catch(e){}
+      })();
+    </script>
+    <script type="module" src="/src/main.jsx"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  </body>
+</html>

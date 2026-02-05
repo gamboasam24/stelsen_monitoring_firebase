@@ -1,0 +1,6 @@
+{
+  "appId": "stelsenmonitoring.mobileapp",
+  "appName": "Stelsen Monitoring",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}
